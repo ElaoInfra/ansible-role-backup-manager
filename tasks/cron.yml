@@ -1,0 +1,6 @@
+---
+
+- name: cron > Template
+  template:
+    src:  "{{ elao_backup_manager_cron_template }}"
+    dest: "/etc/cron.{{ elao_backup_manager_cron_frequency }}/backup-manager"

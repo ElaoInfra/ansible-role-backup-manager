@@ -5,3 +5,7 @@ elao_backup_manager_configs_exclusive: false
 elao_backup_manager_configs_dir:       /etc/backup-manager
 elao_backup_manager_configs_template:  configs/base.conf.j2
 elao_backup_manager_configs:           []
+
+# Cron
+elao_backup_manager_cron_frequency: daily
+elao_backup_manager_cron_template:  cron/base.j2
