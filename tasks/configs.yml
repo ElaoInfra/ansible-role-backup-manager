@@ -1,0 +1,31 @@
+---
+
+- name: configs > Directory
+  file:
+    path:  "{{ elao_backup_manager_configs_dir }}"
+    state: directory
+    owner: root
+    group: root
+
+- name: configs > Templates
+  template:
+    src:  "{{ item.template|default(elao_backup_manager_configs_template) }}"
+    dest: "{{ elao_backup_manager_configs_dir }}/{{ item.file }}"
+  register: _elao_backup_manager_configs_templates_output
+  with_items: elao_backup_manager_configs
+
+- name: configs > Exclusive - find files
+  command: "find -type f -printf '%P\n'"
+  args:
+    chdir: "{{ elao_backup_manager_configs_dir }}"
+  changed_when: false
+  register: _elao_backup_manager_configs_find_output
+  when: elao_backup_manager_configs_exclusive
+
+- name: configs > Exclusive - remove files
+  file:
+    path:  "{{ elao_backup_manager_configs_dir }}/{{ item }}"
+    state: absent
+  when: elao_backup_manager_configs_exclusive and (item not in elao_backup_manager_configs|map(attribute='file'))
+  with_items: _elao_backup_manager_configs_find_output.stdout_lines
+  register: _elao_backup_manager_configs_clean_output

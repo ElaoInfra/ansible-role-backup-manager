@@ -1,0 +1,25 @@
+---
+
+- name: install > Check package
+  command: "dpkg -s backup-manager"
+  always_run: yes
+  failed_when: false
+  changed_when: false
+  register: _elao_backup_manager_package_check_output
+
+- name: install > Copy package
+  copy:
+    src:  backup-manager_0.7.10-1~elao_amd64.deb
+    dest: /tmp/backup-manager_0.7.10-1~elao_amd64.deb
+  when: _elao_backup_manager_package_check_output.rc != 0
+
+- name: install > Install package
+  apt:
+    deb: /tmp/backup-manager_0.7.10-1~elao_amd64.deb
+  when: _elao_backup_manager_package_check_output.rc != 0
+
+- name: install > Remove package
+  file:
+    path:  /tmp/backup-manager_0.7.10-1~elao_amd64.deb
+    state: absent
+  when: _elao_backup_manager_package_check_output.rc != 0
