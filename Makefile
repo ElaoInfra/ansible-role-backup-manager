@@ -53,10 +53,14 @@ build-packages:
 
 build-package@debian-wheezy:
 	apt-get install -y git gettext checkinstall
+	# Get sources
 	git clone ${PACKAGE_SOURCE} ~/package
 	cd ~/package && git checkout ${PACKAGE_SOURCE_REVISION}
-	cd ~/package && echo ${PACKAGE_DESCRIPTION} > description-pak
+	# Package description
+	echo ${PACKAGE_DESCRIPTION} > ~/package/description-pak
+	# Install
 	cd ~/package && make install PREFIX=/usr PERL5DIR=/usr/share/perl5
+	# Checkinstall
 	cd ~/package && checkinstall \
 	    -y \
 	    --install=no \
@@ -64,10 +68,11 @@ build-package@debian-wheezy:
 	    --pkgname=${PACKAGE_NAME} \
 	    --pkgversion=${PACKAGE_VERSION} \
 	    --pkgrelease=${PACKAGE_RELEASE} \
-	    --pkggroup=${PACKAGE_GROUP}  \
+	    --pkggroup=${PACKAGE_GROUP} \
 	    --provides=${PACKAGE_PROVIDES} \
 	    --maintainer=${PACKAGE_MAINTAINER} \
 	    --pkglicense=${PACKAGE_LICENSE} \
 	    --pkgsource=${PACKAGE_SOURCE} \
 	    make install PREFIX=/usr PERL5DIR=/usr/share/perl5
-	cd ~/package && mv *.deb /srv/files
+	# Move package files
+	mv ~/package/*.deb /srv/files
