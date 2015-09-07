@@ -9,7 +9,7 @@ COLOR_COMMENT = \033[33m
 ## Package
 PACKAGE_NAME        = backup-manager
 PACKAGE_DESCRIPTION = Versatile yet easy to use command line backup tool for GNU/Linux. Suitable for desktop and servers.
-PACKAGE_VERSION     = 0.7.10
+PACKAGE_VERSION     = 0.7.11
 PACKAGE_RELEASE     = elao1
 PACKAGE_GROUP       = admin
 PACKAGE_PROVIDES    = backup-manager
@@ -18,7 +18,7 @@ PACKAGE_LICENSE     = GPL
 
 ## Package - Source
 PACKAGE_SOURCE          = https://github.com/sukria/Backup-Manager.git
-PACKAGE_SOURCE_REVISION = 0c6c3cf
+PACKAGE_SOURCE_REVISION = 7894744
 
 ## Help
 help:
