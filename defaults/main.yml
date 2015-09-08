@@ -1,5 +1,8 @@
 ---
 
+# Install
+elao_backup_manager_package_version:   0.7.11-elao1
+
 # Configs
 elao_backup_manager_configs_exclusive: false
 elao_backup_manager_configs_dir:       /etc/backup-manager

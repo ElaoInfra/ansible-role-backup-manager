@@ -1,7 +1,7 @@
 ---
 
 - name: install > Check package
-  command: "dpkg -s backup-manager"
+  command: "dpkg-query -W -f '${version}\n' backup-manager"
   always_run: yes
   failed_when: false
   changed_when: false
@@ -9,17 +9,17 @@
 
 - name: install > Copy package
   copy:
-    src:  backup-manager_0.7.11-elao1_amd64.deb
-    dest: /tmp/backup-manager_0.7.11-elao1_amd64.deb
-  when: _elao_backup_manager_package_check_output.rc != 0
+    src:  backup-manager_{{ elao_backup_manager_package_version }}_amd64.deb
+    dest: /tmp/backup-manager.deb
+  when: _elao_backup_manager_package_check_output.rc != 0 or (_elao_backup_manager_package_check_output.stdout != elao_backup_manager_package_version)
 
 - name: install > Install package
   apt:
-    deb: /tmp/backup-manager_0.7.11-elao1_amd64.deb
-  when: _elao_backup_manager_package_check_output.rc != 0
+    deb: /tmp/backup-manager.deb
+  when: _elao_backup_manager_package_check_output.rc != 0 or (_elao_backup_manager_package_check_output.stdout != elao_backup_manager_package_version)
 
 - name: install > Remove package
   file:
-    path:  /tmp/backup-manager_0.7.11-elao1_amd64.deb
+    path:  /tmp/backup-manager.deb
     state: absent
-  when: _elao_backup_manager_package_check_output.rc != 0
+  when: _elao_backup_manager_package_check_output.rc != 0 or (_elao_backup_manager_package_check_output.stdout != elao_backup_manager_package_version)
