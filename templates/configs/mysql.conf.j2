@@ -241,27 +241,27 @@ export BM_TARBALLINC_MASTERDATEVALUE="1"
 # directories or you may have corrupted archives.
 # Enter here the list of databases to backup.
 # Wildcard: __ALL__ (will dump all the databases in one archive)
-export BM_PGSQL_DATABASES="__ALL__"
+{{ macros.config_row(config, 'BM_PGSQL_DATABASES', '__ALL__') }}
 
 # The user who is allowed to read every databases filled in BM_PGSQL_DATABASES
-export BM_PGSQL_ADMINLOGIN="root"
+{{ macros.config_row(config, 'BM_PGSQL_ADMINLOGIN', 'root') }}
 
 # its password
-export BM_PGSQL_ADMINPASS=""
+{{ macros.config_row(config, 'BM_PGSQL_ADMINPASS', '') }}
 
 # the host where the database is
-export BM_PGSQL_HOST="localhost"
+{{ macros.config_row(config, 'BM_PGSQL_HOST', 'localhost') }}
 
 # the port where PostgreSQL listen to on the host
-export BM_PGSQL_PORT="5432"
+{{ macros.config_row(config, 'BM_PGSQL_PORT', 5432) }}
 
 # which compression format to use? (gzip or bzip2)
-export BM_PGSQL_FILETYPE="bzip2"
+{{ macros.config_row(config, 'BM_PGSQL_FILETYPE', 'bzip2') }}
 
 # Extra options to append to pg_dump
 # (take care to what you do; this will be silently added to the
 # command line.)
-export BM_PGSQL_EXTRA_OPTIONS=""
+{{ macros.config_row(config, 'BM_PGSQL_EXTRA_OPTIONS', '') }}
 
 ##############################################################
 # Backup method: svn
