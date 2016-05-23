@@ -118,7 +118,7 @@ export BM_TARBALL_NAMEFORMAT="long"
 #     tar, tar.gz, tar.bz2, tar.lz, dar, zip.
 # Make sure to satisfy the appropriate dependencies
 # (bzip2, dar, lzma, ...).
-export BM_TARBALL_FILETYPE="tar.gz"
+{{ macros.config_row(config, 'BM_TARBALL_FILETYPE', 'tar.gz') }}
 
 # You can choose to build archives remotely over SSH.
 # You will then need to fill the BM_UPLOAD_SSH variables
@@ -146,6 +146,7 @@ export BM_TARBALL_DUMPSYMLINKS="false"
 
 # Paths without spaces in their name:
 # export BM_TARBALL_DIRECTORIES="/etc /boot"
+{{ macros.config_row(config, 'BM_TARBALL_DIRECTORIES', '# export BM_TARBALL_DIRECTORIES="/etc /boot"', true) }}
 
 # If one or more of the targets contain a space, use the array:
 declare -a BM_TARBALL_TARGETS
@@ -174,11 +175,11 @@ export BM_TARBALL_EXTRA_OPTIONS=""
 
 # Which frequency to use for the master tarball?
 # possible values: weekly, monthly
-export BM_TARBALLINC_MASTERDATETYPE="weekly"
+{{ macros.config_row(config, 'BM_TARBALLINC_MASTERDATETYPE', 'weekly') }}
 
 # Number of the day, in the BM_TARBALLINC_MASTERDATETYPE frequency
 # when master tarballs should be made
-export BM_TARBALLINC_MASTERDATEVALUE="1"
+{{ macros.config_row(config, 'BM_TARBALLINC_MASTERDATEVALUE', 1) }}
 
 # Examples: you want to make master tarballs every friday:
 # BM_TARBALLINC_MASTERDATETYPE="weekly"
